@@ -21,8 +21,10 @@ export default function LineChart({ data, chartSizing }) {
   function LineChart(
     data,
     {
-      x = ([x]) => x, // given d in data, returns the (temporal) x-value
-      y = ([, y]) => y, // given d in data, returns the (quantitative) y-value
+      x = ([x]) => x, // Default function assumes it is passed an array of arrays
+      y = ([, y]) => y,
+      // x = (d) => d.x, // Default function assumes it is passed an array of objects
+      // y = (d) => d.y,
       defined, // for gaps in data
       curve = d3.curveLinear, // method of interpolation between points
       marginTop = 20, // top margin, in pixels
@@ -31,7 +33,7 @@ export default function LineChart({ data, chartSizing }) {
       marginLeft = 40, // left margin, in pixels
       width = 640, // outer width, in pixels
       height = 400, // outer height, in pixels
-      xType = d3.scaleLinear, // the x-scale type
+      xType = d3.scaleLog, // the x-scale type
       xDomain, // [xmin, xmax]
       xRange = [marginLeft, width - marginRight], // [left, right]
       yType = d3.scaleLinear, // the y-scale type
