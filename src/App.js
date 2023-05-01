@@ -1,9 +1,7 @@
 import React, { Fragment } from 'react';
+import PSDChart from './Components/PSDChart';
 import BarChart from './BarChart';
-import LineChart from './LineChart';
-import PSDChart from './PSDChart';
-
-import * as d3 from 'd3';
+const dbDump = require('../Helpers/data');
 
 
 function App() {
@@ -17,13 +15,8 @@ function App() {
           barGap: 5,
         }
         } />
-      <PSDChart data={[
-        [4.75, 100],
-        [1.18, 85],
-        [0.3, 15],
-        [0.15, 4],
-        [0.02, 1]
-      ]} />
+      <PSDChart data={dbDump} />
+
     </Fragment>
   );
 }
