@@ -2,7 +2,7 @@ const dbDump = [
   {
     id: 1,
     data: [
-      { size: 4.75, passing: 100 },
+      { size: 8.75, passing: 100 },
       { size: 1.18, passing: 85 },
       { size: 0.3, passing: 15 },
       { size: 0.15, passing: 4 },
@@ -12,7 +12,7 @@ const dbDump = [
   {
     id: 2,
     data: [
-      { size: 4.75, passing: 100 },
+      { size: 8.75, passing: 100 },
       { size: 1.18, passing: 82 },
       { size: 0.3, passing: 10 },
       { size: 0.1, passing: 9 },
@@ -22,7 +22,7 @@ const dbDump = [
   {
     id: 3,
     data: [
-      { size: 4.75, passing: 100 },
+      { size: 8.75, passing: 100 },
       { size: 1.18, passing: 80 },
       { size: 0.3, passing: 10 },
       { size: 0.2, passing: 3 },
@@ -32,7 +32,7 @@ const dbDump = [
   {
     id: 4,
     data: [
-      { size: 4.75, passing: 100 },
+      { size: 8.75, passing: 100 },
       { size: 1.18, passing: 80 },
       { size: 0.5, passing: 32 },
       { size: 0.15, passing: 18 },
@@ -42,7 +42,7 @@ const dbDump = [
   {
     id: 5,
     data: [
-      { size: 4.75, passing: 100 },
+      { size: 8.75, passing: 100 },
       { size: 2, passing: 80 },
       { size: 0.3, passing: 24 },
       { size: 0.15, passing: 11 },
@@ -63,7 +63,7 @@ const dbDump = [
   {
     id: 7,
     data: [
-      { size: 4.75, passing: 100 },
+      { size: 8.75, passing: 100 },
       { size: 1.18, passing: 80 },
       { size: 0.3, passing: 30 },
       { size: 0.15, passing: 20 },
@@ -73,7 +73,7 @@ const dbDump = [
   {
     id: 8,
     data: [
-      { size: 4.75, passing: 100 },
+      { size: 8.75, passing: 100 },
       { size: 1.18, passing: 80 },
       { size: 0.3, passing: 10 },
       { size: 0.15, passing: 10 },

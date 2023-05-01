@@ -1,22 +1,30 @@
 import React from 'react';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
 
-export default function PSDChart() {
-  const data = [
-    { size: 4.75, passing: 100 },
-    { size: 1.18, passing: 85 },
-    { size: 0.3, passing: 15 },
-    { size: 0.15, passing: 4 },
-    { size: 0.02, passing: 1 },
-  ];
+const graphColor = require('../Helpers/graphColor');
 
+export default function PSDChart({ chartData, serials }) {
+  // console.log('data', data);
+  // console.log('serials', serials);
+
+  const lines = serials.map((serial, i) => {
+    return (
+      <Line
+        key={serial}
+        dataKey={serial}
+        stroke={graphColor[i]}
+        connectNulls={true}
+        animationDuration={500}
+      />
+    );
+  });
   return (
     <ResponsiveContainer width={'100%'} height={400}>
-      <LineChart data={data} margin={{ top: 50, right: 50, left: 50, bottom: 50 }}>
+      <LineChart data={chartData} margin={{ top: 50, right: 50, left: 50, bottom: 50 }}>
         <CartesianGrid stroke='#f5f5f5' />
-        <Line dataKey={'passing'}></Line>
+        {lines}
         <XAxis
-          dataKey='size'
+          dataKey='sieve'
           label={{
             value: 'Particle Size (mm)',
             position: 'bottom',

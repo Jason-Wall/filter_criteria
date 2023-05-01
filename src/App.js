@@ -1,27 +1,35 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import PSDChart from './Components/PSDChart';
 import BarChart from './BarChart';
-const dbDump = require('../Helpers/data');
+
+import { rechartDataFormat, sampleSerials } from './Helpers/dataFormat';
 
 
-function App() {
+const dbDump = require('./Helpers/data');
+
+
+// console.log('dbDump', dbDump);
+// console.log('rechartData', rechartData);
+// console.log('serials', serials);
+
+
+export default function App() {
+  // State management and functions:
+  const [chartData, setChartData] = useState([]);
+  const [serials, setSerials] = useState([]);
+
+  useEffect(() => {
+    setChartData(rechartDataFormat(dbDump));
+    setSerials(sampleSerials(dbDump));
+  }, []);
+
   return (
     <Fragment>
-      <BarChart
-        data={[12, 5, 6, 6, 8, 10]}
-        chartSizing={{
-          barHeightMultiplier: 10,
-          barWidth: 100,
-          barGap: 5,
-        }
-        } />
-      <PSDChart data={dbDump} />
-
+      <PSDChart chartData={chartData} serials={serials} />
     </Fragment>
   );
 }
 
-export default App;
 
 
 
