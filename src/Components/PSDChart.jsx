@@ -1,23 +1,41 @@
-import React from 'react';
-import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
+import React, { useState } from 'react';
+import {
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+} from 'recharts';
 
 const graphColor = require('../Helpers/graphColor');
 
-export default function PSDChart({ chartData, serials }) {
-  // console.log('data', data);
-  // console.log('serials', serials);
+//MAIN FUNCTION
+export default function PSDChart({ chartData, serials, classifications }) {
+  //manage state:
+  const [hoverSerial, setHoverSerial] = useState(null);
 
+  //Supporting functions
   const lines = serials.map((serial, i) => {
+    const lineStroke = hoverSerial === serial ? 'red' : '#4B4B4B';
     return (
       <Line
         key={serial}
         dataKey={serial}
-        stroke={graphColor[i]}
+        stroke={lineStroke}
         connectNulls={true}
         animationDuration={500}
+        onMouseOver={() => {
+          console.log(setHoverSerial(serial));
+        }}
+        onMouseOut={() => {
+          setHoverSerial(null);
+        }}
       />
     );
   });
+
   return (
     <ResponsiveContainer width={'100%'} height={400}>
       <LineChart data={chartData} margin={{ top: 50, right: 50, left: 50, bottom: 50 }}>

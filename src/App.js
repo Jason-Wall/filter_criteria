@@ -3,29 +3,28 @@ import PSDChart from './Components/PSDChart';
 import BarChart from './BarChart';
 
 import { rechartDataFormat, sampleSerials } from './Helpers/dataFormat';
-
+import { USCDistribution } from './Helpers/classification';
 
 const dbDump = require('./Helpers/data');
 
-
-// console.log('dbDump', dbDump);
-// console.log('rechartData', rechartData);
-// console.log('serials', serials);
-
-
 export default function App() {
   // State management and functions:
-  const [chartData, setChartData] = useState([]);
+  const [rechartData, setRechartData] = useState([]);
   const [serials, setSerials] = useState([]);
+  const [classifications, setClassifications] = useState([]);
 
   useEffect(() => {
-    setChartData(rechartDataFormat(dbDump));
+    setRechartData(rechartDataFormat(dbDump));
     setSerials(sampleSerials(dbDump));
+    let classifyArr = [];
+    classifyArr = dbDump.map((sample) => USCDistribution(sample.data));
+    setClassifications(classifyArr);
+
   }, []);
 
   return (
     <Fragment>
-      <PSDChart chartData={chartData} serials={serials} />
+      <PSDChart chartData={rechartData} serials={serials} classifications={classifications} />
     </Fragment>
   );
 }
