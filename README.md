@@ -6,7 +6,8 @@
 
 ### Phase 1 - Plotting Data - [D3.js](https://d3js.org/)
 
-- I want to plot a logscale
+- Plot template in logscale.
+- Be able to create a new line and append to plot template.
 - I want to see a summary of the calculations beneath the plot.
 - Calculate filter criteria
 
