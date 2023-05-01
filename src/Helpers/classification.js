@@ -1,22 +1,24 @@
-const data = {
-  id: 7,
-  data: [
-    { size: 8.75, passing: 100 },
-    { size: 1.18, passing: 80 },
-    { size: 0.3, passing: 30 },
-    { size: 0.15, passing: 20 },
-    { size: 0.02, passing: 10 },
-  ]
-};
+// Sample data if need to unit test
+// const sieveResults = {
+//    [
+//     { size: 8.75, passing: 100 },
+//     { size: 1.18, passing: 80 },
+//     { size: 0.3, passing: 30 },
+//     { size: 0.15, passing: 20 },
+//     { size: 0.02, passing: 10 },
+//   ]
+// };
 
-const classify = (sieveResults) => {
-  const divisions = [['gravel', 75], ['sand', 4.75], ['silt', 0.075], ['bottom', 0]];
+const USCDistribution = (sieveResults) => {
+  const divisions = [['cobble', 75], ['gravel', 4.75], ['sand', 0.075], ['fines', 0], ['bottom', 0]];
   const sieveExpanded = [...sieveResults, { size: 1 * 10 ** 6, passing: 100 }, { size: 0, passing: 0 }];
   sieveExpanded.sort((a, b) => b.size - a.size);
 
   const classifyObj = {};
   let divIndex = 0;
   let sieveIndex = 0;
+  let linterp;
+  let prevLinterp = 100;
   let working = true;
 
   while (working === true) {
@@ -30,22 +32,24 @@ const classify = (sieveResults) => {
 
     if (sieve > divSize && sieveDown < divSize) {
       //Linear interpolation between upper and lower sieve sizes against div marker.
-      const linterp = (sieveP - sieveDownP) * (divSize - sieveDown) / (sieve - sieveDown) + sieveDownP;
-      classifyObj[divName] = linterp;
+      linterp = (sieveP - sieveDownP) * (divSize - sieveDown) / (sieve - sieveDown) + sieveDownP;
+      classifyObj[divName] = prevLinterp - linterp;
+      prevLinterp = linterp;
       divIndex++;
     }
     sieveIndex++;
-
+    console.log('sd', sieveDown);
+    console.log('d', divSize);
     if (!sieveDown || !divSize) {
       working = false;
+      classifyObj[divName] = linterp;
     }
+
   }
 
-  console.log(classifyObj);
-
+  return (classifyObj);
 };
 
 
+export { USCDistribution };
 
-
-classify(data.data);
