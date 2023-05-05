@@ -65,6 +65,7 @@ export default function PSDChart({ chartData, serials, classifications }) {
           type='number'
           domain={[0, 100]}
         ></YAxis>
+        <Tooltip />
       </LineChart>
     </ResponsiveContainer>
   );

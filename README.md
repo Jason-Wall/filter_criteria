@@ -8,8 +8,8 @@
 
 - Plot template in logscale.
 - Be able to create a new line and append to plot template.
-- I want to see a summary of the calculations beneath the plot.
 - Calculate filter criteria
+- I want to see a summary of the calculations beneath the plot.
 
 ### Phase 2 - Display Calculations - [MathJax](https://codingislove.com/display-maths-formulas-webpage/)
 
