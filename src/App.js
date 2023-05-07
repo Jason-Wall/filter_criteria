@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
 import PSDChart from './Components/PSDChart';
+import Nav from './Components/Nav';
 
 import { rechartDataFormat, sampleSerials } from './Helpers/dataFormat';
 import { USCDistribution } from './Helpers/classification';
@@ -29,6 +30,7 @@ export default function App() {
 
   return (
     <Fragment>
+      <Nav />
       <PSDChart chartData={rechartData} serials={serials} classifications={classifications} />
     </Fragment>
   );
