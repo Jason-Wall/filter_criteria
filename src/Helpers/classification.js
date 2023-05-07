@@ -38,8 +38,6 @@ const USCDistribution = (sieveResults) => {
       divIndex++;
     }
     sieveIndex++;
-    console.log('sd', sieveDown);
-    console.log('d', divSize);
     if (!sieveDown || !divSize) {
       working = false;
       classifyObj[divName] = linterp;

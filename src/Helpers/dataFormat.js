@@ -1,12 +1,10 @@
-const dbDump = require('./data');
-
 
 const rechartDataFormat = (dbDump) => {
   const sieveSet = new Set();
   const rechartData = {};
 
   for (const sample of dbDump) {
-    for (const sieve of sample.data) {
+    for (const sieve of sample.results) {
       if (!sieveSet.has(sieve.size)) {
         sieveSet.add(sieve.size);
         rechartData[sieve.size] = {};
@@ -27,7 +25,7 @@ const rechartDataFormat = (dbDump) => {
 const sampleSerials = (dbDump) => {
   const serials = [];
   for (const sample of dbDump) {
-    serials.push(sample.id);
+    serials.push(sample.sample_id);
   }
   return serials;
 };

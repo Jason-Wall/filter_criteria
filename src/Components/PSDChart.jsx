@@ -35,7 +35,6 @@ export default function PSDChart({ chartData, serials, classifications }) {
       />
     );
   });
-
   return (
     <ResponsiveContainer width={'100%'} height={400}>
       <LineChart data={chartData} margin={{ top: 50, right: 50, left: 50, bottom: 50 }}>

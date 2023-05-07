@@ -9,4 +9,4 @@ const logXGrid = (lowerBound, upperBound) => {
   return grid;
 };
 
-console.log(logXGrid(0.01, 100));
+// console.log(logXGrid(0.01, 100));
