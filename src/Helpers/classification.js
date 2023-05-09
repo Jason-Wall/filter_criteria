@@ -33,6 +33,8 @@ const USCDistribution = (sieveResults) => {
     if (sieve > divSize && sieveDown < divSize) {
       //Linear interpolation between upper and lower sieve sizes against div marker.
       linterp = (sieveP - sieveDownP) * (divSize - sieveDown) / (sieve - sieveDown) + sieveDownP;
+      //one decimal
+      linterp = Number(linterp.toPrecision(2));
       classifyObj[divName] = prevLinterp - linterp;
       prevLinterp = linterp;
       divIndex++;
