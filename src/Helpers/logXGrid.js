@@ -8,5 +8,3 @@ const logXGrid = (lowerBound, upperBound) => {
   }
   return grid;
 };
-
-// console.log(logXGrid(0.01, 100));

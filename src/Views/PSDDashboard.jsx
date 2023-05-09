@@ -19,7 +19,7 @@ export default function App() {
   const [serials, setSerials] = useState([]);
   // const [classifications, setClassifications] = useState([]);
   const [tableData, setTableData] = useState([]);
-  const [selectedSample, setSelectedSample] = useState(null);
+  const [selectedRows, setSelectedRows] = useState([]);
 
   useEffect(() => {
     //Get all PSD data from server:
@@ -51,10 +51,11 @@ export default function App() {
     return <h1>Loading</h1>;
   }
 
+  console.log(selectedRows);
   return (
     <Container>
       <Grid>
-        <PSDChart chartData={rechartData} serials={serials} selectedSample={selectedSample} />
+        <PSDChart chartData={rechartData} serials={serials} selectedRows={selectedRows} />
       </Grid>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
@@ -62,7 +63,7 @@ export default function App() {
             columns={sampleListCol}
             rows={tableData}
             checkbox={true}
-            setSelectedSample={setSelectedSample}
+            setSelectedRows={setSelectedRows}
           />
         </Grid>
       </Box>

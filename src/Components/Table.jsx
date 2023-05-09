@@ -14,6 +14,10 @@ export default function Table(props) {
         }}
         pageSizeOptions={[5, 10, 20]}
         checkboxSelection={props.checkbox}
+        onRowSelectionModelChange={(selection) => {
+          props.setSelectedRows(selection);
+        }}
+        selectionModel={props.selectedRows}
       />
     </div>
   );

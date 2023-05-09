@@ -12,13 +12,13 @@ import {
 const graphColor = require('../Helpers/graphColor');
 
 //MAIN FUNCTION
-export default function PSDChart({ chartData, serials }) {
+export default function PSDChart({ chartData, serials, selectedRows }) {
   //manage state:
   const [hoverSerial, setHoverSerial] = useState(null);
 
   //Supporting functions
   const lines = serials.map((serial, i) => {
-    const lineStroke = hoverSerial === serial ? 'red' : '#4B4B4B';
+    const lineStroke = selectedRows.includes(i) ? 'red' : '#4B4B4B';
     return (
       <Line
         key={serial}
@@ -35,6 +35,7 @@ export default function PSDChart({ chartData, serials }) {
       />
     );
   });
+
   return (
     <ResponsiveContainer width={'100%'} height={400}>
       <LineChart data={chartData} margin={{ top: 50, right: 50, left: 50, bottom: 50 }}>
