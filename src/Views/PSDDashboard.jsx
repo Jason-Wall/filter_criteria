@@ -47,14 +47,12 @@ export default function App() {
     { field: 'sample_serial', headerName: 'Sample Serial', width: 150 },
     { field: 'serial', headerName: 'Test Serial', width: 150 },
     { field: 'test_date', headerName: 'Test Date', width: 150, hide: true },
-    { field: 'cobble', headerName: 'Cobble (%)', width: 150 },
     { field: 'gravel', headerName: 'Gravel (%)', width: 150 },
     { field: 'sand', headerName: 'Sand (%)', width: 150 },
     { field: 'fines', headerName: 'Fines (%)', width: 150 },
   ];
 
   console.log('tableData', tableData);
-  // console.log('classifications', classifications);
 
   if (!tableData.length) {
     return <h1>Loading</h1>;
@@ -65,15 +63,9 @@ export default function App() {
       <Grid>
         <PSDChart chartData={rechartData} serials={serials} />
       </Grid>
-      {/* <DataTable /> */}
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
-          <Grid item>
-            <Table columns={sampleListCol} rows={tableData} checkbox={true} />
-          </Grid>
-          {/* <Grid item xs={6} md={8}>
-            <Table />
-          </Grid> */}
+          <Table columns={sampleListCol} rows={tableData} checkbox={true} />
         </Grid>
       </Box>
     </Container>
