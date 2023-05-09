@@ -8,7 +8,6 @@ import Item from '../Components/Item';
 //Custom Components
 import PSDChart from '../Components/PSDChart';
 import Table from '../Components/Table';
-import DataTable from '../Components/DataTable';
 //Helper Functions
 import { rechartDataFormat, sampleSerials } from '../Helpers/dataFormat';
 import { USCDistribution } from '../Helpers/classification';
@@ -20,11 +19,11 @@ export default function App() {
   const [serials, setSerials] = useState([]);
   // const [classifications, setClassifications] = useState([]);
   const [tableData, setTableData] = useState([]);
+  const [selectedSample, setSelectedSample] = useState(null);
 
   useEffect(() => {
     //Get all PSD data from server:
     axios.get('https://soilsserver-production.up.railway.app/psd/').then((res) => {
-      console.log('axios.get All psd data', res.data);
       const dbDump = res.data;
       setRechartData(rechartDataFormat(dbDump));
       setSerials(sampleSerials(dbDump));
@@ -37,10 +36,6 @@ export default function App() {
         return sample;
       });
       setTableData(tableArr);
-
-      // let classifyArr = [];
-      // // classifyArr = dbDump.map((sample) => USCDistribution(sample.results));
-      // setClassifications(classifyArr);
     });
   }, []);
   const sampleListCol = [
@@ -52,8 +47,6 @@ export default function App() {
     { field: 'fines', headerName: 'Fines (%)', width: 150 },
   ];
 
-  console.log('tableData', tableData);
-
   if (!tableData.length) {
     return <h1>Loading</h1>;
   }
@@ -61,11 +54,16 @@ export default function App() {
   return (
     <Container>
       <Grid>
-        <PSDChart chartData={rechartData} serials={serials} />
+        <PSDChart chartData={rechartData} serials={serials} selectedSample={selectedSample} />
       </Grid>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
-          <Table columns={sampleListCol} rows={tableData} checkbox={true} />
+          <Table
+            columns={sampleListCol}
+            rows={tableData}
+            checkbox={true}
+            setSelectedSample={setSelectedSample}
+          />
         </Grid>
       </Box>
     </Container>

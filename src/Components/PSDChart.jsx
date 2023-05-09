@@ -12,7 +12,7 @@ import {
 const graphColor = require('../Helpers/graphColor');
 
 //MAIN FUNCTION
-export default function PSDChart({ chartData, serials, classifications }) {
+export default function PSDChart({ chartData, serials }) {
   //manage state:
   const [hoverSerial, setHoverSerial] = useState(null);
 
