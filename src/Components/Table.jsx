@@ -2,7 +2,12 @@ import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
 export default function Table(props) {
-  console.log('rows', props.rows);
+  //Supporting functions
+  const handleFilterModelChange = (model) => {
+    props.setFilterModel(model);
+  };
+
+  //Main component
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
@@ -19,6 +24,7 @@ export default function Table(props) {
           props.setSelectedRows(selection);
         }}
         rowSelectionModel={props.selectedRows}
+        onFilterModelChange={handleFilterModelChange}
       />
     </div>
   );

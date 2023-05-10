@@ -16,8 +16,7 @@ import { USCDistribution } from '../Helpers/classification';
 export default function App() {
   // State management and functions:
   const [rechartData, setRechartData] = useState([]);
-  const [serials, setSerials] = useState([]);
-  // const [classifications, setClassifications] = useState([]);
+  const [filterModel, setFilterModel] = React.useState(null);
   const [tableData, setTableData] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
 
@@ -26,7 +25,6 @@ export default function App() {
     axios.get('https://soilsserver-production.up.railway.app/psd/').then((res) => {
       const dbDump = res.data;
       setRechartData(rechartDataFormat(dbDump));
-      setSerials(sampleSerials(dbDump));
 
       let tableArr = [];
       tableArr = dbDump.map((sample) => {
@@ -39,19 +37,20 @@ export default function App() {
     });
   }, []);
   const sampleListCol = [
-    { field: 'sample_serial', headerName: 'Sample Serial', width: 150 },
-    { field: 'serial', headerName: 'Test Serial', width: 150 },
-    { field: 'test_date', headerName: 'Test Date', width: 150, hide: true },
-    { field: 'gravel', headerName: 'Gravel (%)', width: 150 },
-    { field: 'sand', headerName: 'Sand (%)', width: 150 },
-    { field: 'fines', headerName: 'Fines (%)', width: 150 },
+    { field: 'sample_serial', headerName: 'Sample Serial', width: 150, type: 'string' },
+    { field: 'serial', headerName: 'Test Serial', width: 150, type: 'string' },
+    { field: 'test_date', headerName: 'Test Date', width: 150 },
+    { field: 'gravel', headerName: 'Gravel (%)', width: 150, type: 'number' },
+    { field: 'sand', headerName: 'Sand (%)', width: 150, type: 'number' },
+    { field: 'fines', headerName: 'Fines (%)', width: 150, type: 'number' },
   ];
 
   if (!tableData.length) {
     return;
   }
 
-  console.log(selectedRows);
+  console.log('filterModel', filterModel);
+
   return (
     <Container>
       <Grid>
@@ -60,6 +59,7 @@ export default function App() {
           tableData={tableData}
           selectedRows={selectedRows}
           setSelectedRows={setSelectedRows}
+          filterModel={filterModel}
         />
       </Grid>
       <Box sx={{ flexGrow: 1 }}>
@@ -70,6 +70,7 @@ export default function App() {
             checkbox={true}
             selectedRows={selectedRows}
             setSelectedRows={setSelectedRows}
+            setFilterModel={setFilterModel}
           />
         </Grid>
       </Box>

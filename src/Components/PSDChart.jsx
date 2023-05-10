@@ -66,6 +66,7 @@ export default function PSDChart({ chartData, tableData, selectedRows, setSelect
   const referenceLines = refLineData.map((line) => {
     return (
       <ReferenceLine
+        key={line.value}
         x={line.x}
         stroke='grey'
         strokeDasharray='5 5'
@@ -103,6 +104,7 @@ export default function PSDChart({ chartData, tableData, selectedRows, setSelect
           domain={[0, 100]}
           ticks={[100, 80, 60, 40, 20, 0]}
         ></YAxis>
+
         {referenceLines}
       </LineChart>
     </ResponsiveContainer>
