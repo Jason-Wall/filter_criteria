@@ -1,4 +1,4 @@
-
+//Format data for recharts plotting.
 const rechartDataFormat = (dbDump) => {
   const sieveSet = new Set();
   const rechartData = {};
@@ -19,7 +19,6 @@ const rechartDataFormat = (dbDump) => {
   rechartArr.sort((a, b) => {
     return a.sieve - b.sieve;
   });
-  console.log('rechartData', rechartArr);
   return rechartArr;
 };
 

@@ -1,7 +1,9 @@
+
+// Checks if a sample passes the table filtering model.
+// Mui free only allows for single field filtering at the moment.
 const filterCheck = (sample, filterModel) => {
   const filter = filterModel[0];
   if (filter && filter.value) {
-    console.log('inside switch');
     switch (filter.operator) {
       case '>':
         return sample[filter.field] > filter.value;

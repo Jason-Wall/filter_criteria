@@ -38,6 +38,7 @@ export default function PSDChart({ chartData, tableData, selectedRows, setSelect
     }
   };
 
+  //Generate lines for chart
   const lines = tableData.map((sample, index) => {
     const linestyle = lineStyling(sample.id, index);
     return (
@@ -57,6 +58,7 @@ export default function PSDChart({ chartData, tableData, selectedRows, setSelect
     );
   });
 
+  // Generate reference lines for chart
   const refLineData = [
     { value: 'Clay', x: 0.002, position: 'insideTopLeft' },
     { value: 'Silt', x: 0.08, position: 'insideTopLeft' },

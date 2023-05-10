@@ -37,13 +37,11 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    console.log('filterModel', filterModel);
+    // Applies filtering model to chart
     const filterTableData = [];
     for (const sample of tableData) {
-      console.log(filterCheck(sample, filterModel));
       filterTableData.push({ ...sample, hide: !filterCheck(sample, filterModel) });
     }
-    console.log('filterTableData', filterTableData);
     setTableData(filterTableData);
   }, [filterModel]);
 
