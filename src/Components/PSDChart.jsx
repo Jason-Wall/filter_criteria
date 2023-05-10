@@ -6,6 +6,7 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
+  ReferenceLine,
   Tooltip,
 } from 'recharts';
 
@@ -13,14 +14,11 @@ const graphColor = require('../Helpers/graphColor');
 
 //MAIN FUNCTION
 export default function PSDChart({ chartData, tableData, selectedRows, setSelectedRows }) {
-  //manage state:
-  const [hoverSerial, setHoverSerial] = useState(null);
-
   //Supporting functions
-  const lineStyling = (id) => {
+  const lineStyling = (id, index) => {
     if (selectedRows.length === 0) {
       return {
-        stroke: '#5b5b5b',
+        stroke: graphColor[index],
         strokeWidth: 2,
         zIndex: 1000,
       };
@@ -41,8 +39,8 @@ export default function PSDChart({ chartData, tableData, selectedRows, setSelect
     }
   };
 
-  const lines = tableData.map((sample) => {
-    const linestyle = lineStyling(sample.id);
+  const lines = tableData.map((sample, index) => {
+    const linestyle = lineStyling(sample.id, index);
     return (
       <Line
         key={sample.id}
@@ -55,6 +53,23 @@ export default function PSDChart({ chartData, tableData, selectedRows, setSelect
         onClick={() => {
           setSelectedRows([sample.id]);
         }}
+      />
+    );
+  });
+
+  const refLineData = [
+    { value: 'Clay', x: 0.002, position: 'insideTopLeft' },
+    { value: 'Silt', x: 0.08, position: 'insideTopLeft' },
+    { value: 'Sand', x: 2.0, position: 'insideBottomLeft' },
+    { value: 'Gravel', x: 64.0, position: 'insideBottomLeft' },
+  ];
+  const referenceLines = refLineData.map((line) => {
+    return (
+      <ReferenceLine
+        x={line.x}
+        stroke='grey'
+        strokeDasharray='5 5'
+        label={{ value: line.value, position: line.position, fontSize: 12 }}
       />
     );
   });
@@ -72,7 +87,7 @@ export default function PSDChart({ chartData, tableData, selectedRows, setSelect
           }}
           type='number'
           scale='log'
-          ticks={[100, 50, 10, 1, 0.5, 0.1, 0.05, 0.01, 0.005, 0.001]}
+          ticks={[100, 50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01, 0.005, 0.002, 0.001]}
           reversed={true}
           allowDecimals={true}
           domain={[100, 0.001]}
@@ -83,12 +98,12 @@ export default function PSDChart({ chartData, tableData, selectedRows, setSelect
             value: 'Percent Passing (%)',
             angle: -90,
             position: 'insideLeft',
-            textAnchor: 'middle',
           }}
           type='number'
           domain={[0, 100]}
+          ticks={[100, 80, 60, 40, 20, 0]}
         ></YAxis>
-        {/* <Tooltip /> */}
+        {referenceLines}
       </LineChart>
     </ResponsiveContainer>
   );
