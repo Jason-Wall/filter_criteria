@@ -57,7 +57,7 @@ export default function App() {
       <Grid>
         <PSDChart
           chartData={rechartData}
-          serials={serials}
+          tableData={tableData}
           selectedRows={selectedRows}
           setSelectedRows={setSelectedRows}
         />

@@ -16,7 +16,6 @@ export default function Table(props) {
         pageSizeOptions={[5, 10, 20]}
         checkboxSelection={props.checkbox}
         onRowSelectionModelChange={(selection) => {
-          console.log(selection);
           props.setSelectedRows(selection);
         }}
         rowSelectionModel={props.selectedRows}

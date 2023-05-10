@@ -12,30 +12,49 @@ import {
 const graphColor = require('../Helpers/graphColor');
 
 //MAIN FUNCTION
-export default function PSDChart({ chartData, serials, selectedRows, setSelectedRows }) {
+export default function PSDChart({ chartData, tableData, selectedRows, setSelectedRows }) {
   //manage state:
   const [hoverSerial, setHoverSerial] = useState(null);
-  console.log('chartData', chartData);
 
   //Supporting functions
-  const lines = serials.map((serial, i) => {
-    const lineStroke = selectedRows.includes(i) ? 'red' : '#4B4B4B';
-    const strokeWidth = selectedRows.includes(i) ? 3 : 2;
+  const lineStyling = (id) => {
+    if (selectedRows.length === 0) {
+      return {
+        stroke: '#5b5b5b',
+        strokeWidth: 2,
+        zIndex: 1000,
+      };
+    }
+    if (selectedRows.includes(id)) {
+      return {
+        stroke: 'red',
+        strokeWidth: 3,
+        zIndex: 2000,
+      };
+    }
+    if (!selectedRows.includes(id)) {
+      return {
+        stroke: '#ababab',
+        strokeWidth: 2,
+        zIndex: 1000,
+      };
+    }
+  };
+
+  const lines = tableData.map((sample) => {
+    const linestyle = lineStyling(sample.id);
     return (
       <Line
-        key={serial}
-        dataKey={serial}
-        stroke={lineStroke}
-        strokeWidth={strokeWidth}
+        key={sample.id}
+        dataKey={sample.id}
+        stroke={linestyle.stroke}
+        strokeWidth={linestyle.strokeWidth}
+        sx={{ zIndex: linestyle.zIndex }}
         connectNulls={true}
         animationDuration={500}
         onClick={() => {
-          console.log('clicked', i);
-          setSelectedRows([i]);
+          setSelectedRows([sample.id]);
         }}
-        // onMouseOut={() => {
-        //   setSelectedRows([]);
-        // }}
       />
     );
   });

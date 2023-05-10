@@ -10,7 +10,7 @@ const rechartDataFormat = (dbDump) => {
         rechartData[sieve.size] = {};
         rechartData[sieve.size].sieve = sieve.size;
       }
-      rechartData[sieve.size][sample.serial] = sieve.passing;
+      rechartData[sieve.size][sample.id] = sieve.passing;
 
     }
   }
