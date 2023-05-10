@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   ResponsiveContainer,
   LineChart,
@@ -7,7 +7,6 @@ import {
   YAxis,
   CartesianGrid,
   ReferenceLine,
-  Tooltip,
 } from 'recharts';
 
 const graphColor = require('../Helpers/graphColor');
@@ -50,6 +49,7 @@ export default function PSDChart({ chartData, tableData, selectedRows, setSelect
         sx={{ zIndex: linestyle.zIndex }}
         connectNulls={true}
         animationDuration={500}
+        hide={sample.hide}
         onClick={() => {
           setSelectedRows([sample.id]);
         }}

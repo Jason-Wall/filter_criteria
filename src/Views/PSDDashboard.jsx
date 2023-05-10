@@ -4,19 +4,19 @@ import axios from 'axios';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Item from '../Components/Item';
 //Custom Components
 import PSDChart from '../Components/PSDChart';
 import Table from '../Components/Table';
 //Helper Functions
 import { rechartDataFormat, sampleSerials } from '../Helpers/dataFormat';
 import { USCDistribution } from '../Helpers/classification';
+import { filterCheck } from '../Helpers/filterData';
 
 //MAIN APPLICATION
 export default function App() {
   // State management and functions:
   const [rechartData, setRechartData] = useState([]);
-  const [filterModel, setFilterModel] = React.useState(null);
+  const [filterModel, setFilterModel] = React.useState([]);
   const [tableData, setTableData] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
 
@@ -28,14 +28,25 @@ export default function App() {
 
       let tableArr = [];
       tableArr = dbDump.map((sample) => {
-        // sample.visible = true;
         const classifyObj = USCDistribution(sample.results);
-        sample = { ...sample, ...classifyObj };
+        sample = { ...sample, ...classifyObj, hide: false };
         return sample;
       });
       setTableData(tableArr);
     });
   }, []);
+
+  useEffect(() => {
+    console.log('filterModel', filterModel);
+    const filterTableData = [];
+    for (const sample of tableData) {
+      console.log(filterCheck(sample, filterModel));
+      filterTableData.push({ ...sample, hide: !filterCheck(sample, filterModel) });
+    }
+    console.log('filterTableData', filterTableData);
+    setTableData(filterTableData);
+  }, [filterModel]);
+
   const sampleListCol = [
     { field: 'sample_serial', headerName: 'Sample Serial', width: 150, type: 'string' },
     { field: 'serial', headerName: 'Test Serial', width: 150, type: 'string' },
@@ -48,8 +59,6 @@ export default function App() {
   if (!tableData.length) {
     return;
   }
-
-  console.log('filterModel', filterModel);
 
   return (
     <Container>

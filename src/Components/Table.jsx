@@ -4,7 +4,7 @@ import { DataGrid } from '@mui/x-data-grid';
 export default function Table(props) {
   //Supporting functions
   const handleFilterModelChange = (model) => {
-    props.setFilterModel(model);
+    props.setFilterModel(model.items);
   };
 
   //Main component
