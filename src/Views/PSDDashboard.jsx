@@ -19,7 +19,7 @@ export default function App() {
   const [serials, setSerials] = useState([]);
   // const [classifications, setClassifications] = useState([]);
   const [tableData, setTableData] = useState([]);
-  const [selectedRows, setSelectedRows] = useState([1]);
+  const [selectedRows, setSelectedRows] = useState([]);
 
   useEffect(() => {
     //Get all PSD data from server:
@@ -48,7 +48,7 @@ export default function App() {
   ];
 
   if (!tableData.length) {
-    return <h1>Loading</h1>;
+    return;
   }
 
   console.log(selectedRows);
