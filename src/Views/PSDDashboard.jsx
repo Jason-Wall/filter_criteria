@@ -19,7 +19,7 @@ export default function App() {
   const [serials, setSerials] = useState([]);
   // const [classifications, setClassifications] = useState([]);
   const [tableData, setTableData] = useState([]);
-  const [selectedRows, setSelectedRows] = useState([]);
+  const [selectedRows, setSelectedRows] = useState([1]);
 
   useEffect(() => {
     //Get all PSD data from server:
@@ -30,7 +30,7 @@ export default function App() {
 
       let tableArr = [];
       tableArr = dbDump.map((sample) => {
-        sample.visible = true;
+        // sample.visible = true;
         const classifyObj = USCDistribution(sample.results);
         sample = { ...sample, ...classifyObj };
         return sample;
@@ -55,7 +55,12 @@ export default function App() {
   return (
     <Container>
       <Grid>
-        <PSDChart chartData={rechartData} serials={serials} selectedRows={selectedRows} />
+        <PSDChart
+          chartData={rechartData}
+          serials={serials}
+          selectedRows={selectedRows}
+          setSelectedRows={setSelectedRows}
+        />
       </Grid>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
@@ -63,6 +68,7 @@ export default function App() {
             columns={sampleListCol}
             rows={tableData}
             checkbox={true}
+            selectedRows={selectedRows}
             setSelectedRows={setSelectedRows}
           />
         </Grid>

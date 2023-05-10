@@ -12,26 +12,30 @@ import {
 const graphColor = require('../Helpers/graphColor');
 
 //MAIN FUNCTION
-export default function PSDChart({ chartData, serials, selectedRows }) {
+export default function PSDChart({ chartData, serials, selectedRows, setSelectedRows }) {
   //manage state:
   const [hoverSerial, setHoverSerial] = useState(null);
+  console.log('chartData', chartData);
 
   //Supporting functions
   const lines = serials.map((serial, i) => {
     const lineStroke = selectedRows.includes(i) ? 'red' : '#4B4B4B';
+    const strokeWidth = selectedRows.includes(i) ? 3 : 2;
     return (
       <Line
         key={serial}
         dataKey={serial}
         stroke={lineStroke}
+        strokeWidth={strokeWidth}
         connectNulls={true}
         animationDuration={500}
-        onMouseOver={() => {
-          console.log(setHoverSerial(serial));
+        onClick={() => {
+          console.log('clicked', i);
+          setSelectedRows([i]);
         }}
-        onMouseOut={() => {
-          setHoverSerial(null);
-        }}
+        // onMouseOut={() => {
+        //   setSelectedRows([]);
+        // }}
       />
     );
   });
@@ -65,7 +69,7 @@ export default function PSDChart({ chartData, serials, selectedRows }) {
           type='number'
           domain={[0, 100]}
         ></YAxis>
-        <Tooltip />
+        {/* <Tooltip /> */}
       </LineChart>
     </ResponsiveContainer>
   );

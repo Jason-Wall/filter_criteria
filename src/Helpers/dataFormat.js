@@ -19,6 +19,7 @@ const rechartDataFormat = (dbDump) => {
   rechartArr.sort((a, b) => {
     return a.sieve - b.sieve;
   });
+  console.log('rechartData', rechartArr);
   return rechartArr;
 };
 

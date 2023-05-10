@@ -2,6 +2,7 @@ import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
 export default function Table(props) {
+  console.log('rows', props.rows);
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
@@ -15,9 +16,10 @@ export default function Table(props) {
         pageSizeOptions={[5, 10, 20]}
         checkboxSelection={props.checkbox}
         onRowSelectionModelChange={(selection) => {
+          console.log(selection);
           props.setSelectedRows(selection);
         }}
-        selectionModel={props.selectedRows}
+        rowSelectionModel={props.selectedRows}
       />
     </div>
   );
